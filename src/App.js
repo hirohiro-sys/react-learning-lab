@@ -4,18 +4,11 @@ import "./App.css";
 
 function App() {
   const [image, setImage] = useState("https://source.unsplash.com/random");
-  /* Qiitaで見たuseEffectを使用した実装法*/
-  // useEffect(() => {
-  //   axios
-  //     .get("https://source.unsplash.com/random", { responseType: "blob" })
-  //     .then((res) => {
-  //       setImage(URL.createObjectURL(res.data));
-  //     });
-  // }, []);
+
   const onClickGetRandomImage = () => {
     axios
-      .get("https://source.unsplash.com/random", { responseType: "blob" })
-      .then((res) => setImage(URL.createObjectURL(res.data)));
+      .get("https://source.unsplash.com/random")
+      .then((res) => setImage(res.request.responseURL));
   };
 
   return (
