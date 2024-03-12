@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import './App.css';
+import "./App.css";
 
 function App() {
-  // 画像の状態管理
-  const [image, setImage] = useState(null);
-
-  // 初回レンダリング時にランダムな画像を取得
-  useEffect(() => {
-    axios.get("https://source.unsplash.com/random", { responseType: 'blob', }).then((res) => {
-      setImage(URL.createObjectURL(res.data));
-    });
-  }, []);
-
-  // ボタンクリック時にランダムな画像に切り替え
+  const [image, setImage] = useState("https://source.unsplash.com/random");
+  /* Qiitaで見たuseEffectを使用した実装法*/
+  // useEffect(() => {
+  //   axios
+  //     .get("https://source.unsplash.com/random", { responseType: "blob" })
+  //     .then((res) => {
+  //       setImage(URL.createObjectURL(res.data));
+  //     });
+  // }, []);
   const onClickGetRandomImage = () => {
-    axios.get("https://source.unsplash.com/random", { responseType: 'blob', }).then((res) => setImage(URL.createObjectURL(res.data)));
-  }
+    axios
+      .get("https://source.unsplash.com/random", { responseType: "blob" })
+      .then((res) => setImage(URL.createObjectURL(res.data)));
+  };
 
   return (
     <>
-      <img src={image} width="700px" height="500px" alt="Random Image" />
+      <img src={image} width="500px" height="500px" alt="ランダムな画像" />
       <br />
       <button onClick={onClickGetRandomImage}>画像を変更</button>
     </>
